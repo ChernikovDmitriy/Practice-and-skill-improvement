@@ -1,6 +1,5 @@
 package com.baeldung.ls.web.controller;
 
-
 import com.baeldung.ls.persistence.model.Project;
 import com.baeldung.ls.persistence.model.Task;
 import com.baeldung.ls.persistence.service.IProjectService;
@@ -28,8 +27,8 @@ public class ProjectController {
 
     //
 
-    @GetMapping(value = "/{id}")
-    public ProjectDto findOne(@PathVariable Long id) {
+    @GetMapping(value = "/{category}-{subcategoryId:\\d\\d}/{id}")
+    public ProjectDto findOne(@PathVariable Long id, @PathVariable String category, @PathVariable Integer subcategoryId) {
         Project entity = projectService.findById(id)
                 .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND));
         return convertToDto(entity);
